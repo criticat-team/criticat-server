@@ -1,8 +1,10 @@
-const { ApolloServer } = require('apollo-server');
-const config = require('dotenv').config().parsed;
-const mongoose = require('mongoose');
-const typeDefs = require('./schema');
-const resolvers = require('./resolvers');
+import { ApolloServer } from 'apollo-server';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import resolvers from '@/resolvers';
+import typeDefs from '@/schema';
+
+const config = dotenv.config().parsed;
 
 const mongooseUrl = `mongodb+srv://${config.DB_USER}:${config.DB_PASSWORD}@${
   config.MONGODB_SERVER
