@@ -1,14 +1,14 @@
 import { ApolloServer } from 'apollo-server';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 import resolvers from '@/resolvers';
 import typeDefs from '@/schema';
+import dotenv from 'dotenv';
 
-const config = dotenv.config().parsed;
+dotenv.config();
 
-const mongooseUrl = `mongodb+srv://${config.DB_USER}:${config.DB_PASSWORD}@${
-  config.MONGODB_SERVER
-}/${config.DB_NAME}`;
+const mongooseUrl = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${
+  process.env.MONGODB_SERVER
+}/${process.env.DB_NAME}`;
 
 mongoose.Promise = global.Promise;
 
