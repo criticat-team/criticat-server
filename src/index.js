@@ -6,9 +6,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const mongooseUrl = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${
-  process.env.MONGODB_SERVER
-}/${process.env.DB_NAME}`;
+// prettier-ignore
+const mongooseUrl = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.MONGODB_SERVER}/${process.env.DB_NAME}`;
 
 mongoose.Promise = global.Promise;
 
