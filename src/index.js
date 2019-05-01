@@ -1,18 +1,17 @@
 const { ApolloServer } = require('apollo-server');
+const config = require('dotenv').config().parsed;
+const mongoose = require('mongoose');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
-const mongoose = require('mongoose');
+
+const mongooseUrl = `mongodb+srv://${config.DB_USER}:${config.DB_PASSWORD}@${
+  config.MONGODB_SERVER
+}/${config.DB_NAME}`;
+
 mongoose.Promise = global.Promise;
 
-let config = require('dotenv').config().parsed;
-
-// prettier-ignore
-const url = `mongodb+srv://${config.DB_USER}:${config.DB_PASSWORD}@${config.MONGODB_SERVER}/${config.DB_NAME}`;
-
-mongoose.connect(url, { useNewUrlParser: true, retryWrites: true });
-mongoose.connection.once('open', () =>
-  console.log(`Connected to mongo at ${url}`),
-);
+mongoose.connect(mongooseUrl, { useNewUrlParser: true, retryWrites: true });
+mongoose.connection.once('open', () => console.log(`Connected to mongo at ${mongooseUrl}`));
 
 // Set up Apollo Server
 const server = new ApolloServer({
