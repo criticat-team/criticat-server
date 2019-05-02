@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 const { Schema } = mongoose;
 
 const booksSchema = new Schema({
@@ -8,6 +9,5 @@ const booksSchema = new Schema({
 
 const Book = mongoose.model('book', booksSchema);
 
-module.exports = {
-  Book,
-};
+// eslint-disable-next-line import/prefer-default-export
+export { Book };

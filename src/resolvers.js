@@ -1,6 +1,6 @@
-const { Book } = require('./models');
+import { Book } from '@/models';
 
-module.exports = {
+export default {
   Query: {
     books: () => Book.find({}),
   },
