@@ -2,6 +2,7 @@ import { ApolloServer } from 'apollo-server';
 import mongoose from 'mongoose';
 import resolvers from '@/resolvers';
 import typeDefs from '@/schema';
+import ArticlesAPI from '@/datasources/articles';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -14,10 +15,16 @@ mongoose.Promise = global.Promise;
 mongoose.connect(mongooseUrl, { useNewUrlParser: true, retryWrites: true });
 mongoose.connection.once('open', () => console.log(`Connected to mongo at ${mongooseUrl}`));
 
+// set up any dataSources our resolvers need
+const dataSources = () => ({
+  articlesAPI: new ArticlesAPI(),
+});
+
 // Set up Apollo Server
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  dataSources,
 });
 
 // Start our server if we're not in a test env.

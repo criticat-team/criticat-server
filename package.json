@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/criticat-team/criticat-server#readme",
   "dependencies": {
+    "apollo-datasource-rest": "^0.4.0",
     "apollo-server": "^2.4.8",
     "dotenv": "^7.0.0",
     "graphql": "^14.2.1",
