@@ -1,6 +1,8 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 import querystring from 'querystring';
 
+const DEFAULT_ITEMS_PER_PAGE = 12;
+
 export default class ArticlesAPI extends RESTDataSource {
   constructor() {
     super();
@@ -14,8 +16,12 @@ export default class ArticlesAPI extends RESTDataSource {
     request.headers.set('Authorization', `GoogleLogin auth=${process.env.INOREADER_USER_AUTH}`);
   }
 
-  async getCategory(category) {
-    return this.stream(`user/${process.env.INOREADER_USER_ID}/label/${category}`, {});
+  async getCategory(category, itemsPerPage, continuation) {
+    const params = {
+      n: itemsPerPage || DEFAULT_ITEMS_PER_PAGE,
+      c: continuation,
+    };
+    return this.stream(`user/${process.env.INOREADER_USER_ID}/label/${category}`, params);
   }
 
   async stream(streamId, params) {

@@ -14,16 +14,28 @@ const typeDefs = gql`
     continuation: String
   }
 
+  type ArticleOrigin {
+    streamId: String
+    title: String
+    htmlUrl: String
+  }
+
   type Article {
     id: String
     title: String
+    published: Int
+    image: String
+    url: String
+    author: String
+    content: String
+    origin: ArticleOrigin
   }
 
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
     books: [Book]
-    articles(category: String): ArticlesStream
+    articles(category: String, itemsPerPage: Int, continuation: String): ArticlesStream
   }
 `;
 
