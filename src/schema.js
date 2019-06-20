@@ -14,10 +14,20 @@ const typeDefs = gql`
     continuation: String
   }
 
+  type Category {
+    id: String
+    label: String
+  }
+
   type ArticleOrigin {
-    streamId: String
+    id: String
     title: String
+    categories: [Category]
+    sortId: String
+    firstitemmsec: Int
+    url: String
     htmlUrl: String
+    iconUrl: String
   }
 
   type Article {
@@ -27,6 +37,7 @@ const typeDefs = gql`
     image: String
     url: String
     author: String
+    avatar: String
     content: String
     origin: ArticleOrigin
   }

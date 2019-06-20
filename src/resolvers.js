@@ -18,6 +18,14 @@ export default {
         .attr('src'),
     url: article => article.canonical[0].href,
     title: article => entities.decode(article.title),
-    content: article => cheerio.load(article.summary.content).text(),
+    content: article =>
+      cheerio
+        .load(article.summary.content)
+        .text()
+        .trim(),
+    origin: async (article, args, { dataSources }) => {
+      const { subscriptions } = await dataSources.articlesAPI.getSubscriptions();
+      return subscriptions.find(subscription => subscription.id === article.origin.streamId);
+    },
   },
 };

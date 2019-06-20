@@ -16,6 +16,10 @@ export default class ArticlesAPI extends RESTDataSource {
     request.headers.set('Authorization', `GoogleLogin auth=${process.env.INOREADER_USER_AUTH}`);
   }
 
+  async getSubscriptions() {
+    return this.get('subscription/list');
+  }
+
   async getCategory(category, itemsPerPage, continuation) {
     const params = {
       n: itemsPerPage || DEFAULT_ITEMS_PER_PAGE,
