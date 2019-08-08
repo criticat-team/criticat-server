@@ -20,15 +20,23 @@ export default class ArticlesAPI extends RESTDataSource {
     return this.get('subscription/list');
   }
 
-  async getCategory(category, itemsPerPage, continuation) {
+  async getCategory(itemsPerPage, continuation, category) {
+    return this.stream(
+      `user/${process.env.INOREADER_USER_ID}/label/${category}`,
+      itemsPerPage,
+      continuation,
+    );
+  }
+
+  async getAll(itemsPerPage, continuation) {
+    return this.stream(`user/${process.env.INOREADER_USER_ID}/`, itemsPerPage, continuation);
+  }
+
+  async stream(streamId, itemsPerPage, continuation) {
     const params = {
       n: itemsPerPage || DEFAULT_ITEMS_PER_PAGE,
       c: continuation,
     };
-    return this.stream(`user/${process.env.INOREADER_USER_ID}/label/${category}`, params);
-  }
-
-  async stream(streamId, params) {
     const escapedStreamId = querystring.escape(streamId);
     return this.get(`stream/contents/${escapedStreamId}`, params);
   }
