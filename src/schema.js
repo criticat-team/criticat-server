@@ -40,6 +40,7 @@ const typeDefs = gql`
     avatar: String
     content: String
     origin: ArticleOrigin
+    categories: [String]
   }
 
   # The "Query" type is the root of all GraphQL queries.
