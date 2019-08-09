@@ -70,6 +70,21 @@ const typeDefs = gql`
     value: String
   }
 
+  type Image {
+    file_path: String
+    aspect_ratio: Float
+    height: Int
+    width: Int
+    iso_639_1: String
+    vote_count: Int
+    vote_average: Float
+  }
+
+  type Images {
+    backdrops: [Image]
+    posters: [Image]
+  }
+
   type Movie {
     adult: Boolean
     backdrop_path: String
@@ -94,6 +109,7 @@ const typeDefs = gql`
     title: String
     video: String
     ratings: [Rating]
+    images: Images
   }
 
   # The "Query" type is the root of all GraphQL queries.
@@ -101,7 +117,7 @@ const typeDefs = gql`
   type Query {
     books: [Book]
     articles(category: String, itemsPerPage: Int, continuation: String): ArticlesStream
-    movie(id: ID!): Movie
+    movie(id: ID!, language: String): Movie
   }
 `;
 
