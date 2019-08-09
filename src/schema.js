@@ -43,11 +43,59 @@ const typeDefs = gql`
     categories: [String]
   }
 
+  type Genre {
+    id: ID
+    name: String
+  }
+
+  type ProductionCompany {
+    name: String
+    id: ID
+    logo_path: String
+    origin_country: String
+  }
+
+  type ProductionCountry {
+    iso_3166_1: ID
+    name: String
+  }
+
+  type SpokenLanguage {
+    iso_639_1: ID
+    name: String
+  }
+
+  type Movie {
+    adult: Boolean
+    backdrop_path: String
+    #belongs_to_collection: String
+    genres: [Genre]
+    homepage: String
+    id: ID
+    imdb_id: String
+    original_language: String
+    original_title: String
+    overview: String
+    popularity: Float
+    poster_path: String
+    production_companies: [ProductionCompany]
+    production_countries: [ProductionCountry]
+    release_date: String
+    revenue: Int
+    runtime: Int
+    spoken_languages: [SpokenLanguage]
+    status: String
+    tagline: String
+    title: String
+    video: String
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
     books: [Book]
     articles(category: String, itemsPerPage: Int, continuation: String): ArticlesStream
+    movie(id: ID!): Movie
   }
 `;
 

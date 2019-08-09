@@ -11,6 +11,7 @@ export default {
       category
         ? dataSources.inoreaderAPI.getCategory(itemsPerPage, continuation, category)
         : dataSources.inoreaderAPI.getAll(itemsPerPage, continuation),
+    movie: async (root, { id }, { dataSources }) => dataSources.tmdbAPI.getMovie(id),
   },
   Article: {
     image: article =>
