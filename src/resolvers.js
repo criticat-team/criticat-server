@@ -9,8 +9,10 @@ export default {
     books: () => Book.find({}),
     articles: async (root, { category, itemsPerPage, continuation }, { dataSources }) =>
       category
-        ? dataSources.articlesAPI.getCategory(itemsPerPage, continuation, category)
-        : dataSources.articlesAPI.getAll(itemsPerPage, continuation),
+        ? dataSources.inoreaderAPI.getCategory(itemsPerPage, continuation, category)
+        : dataSources.inoreaderAPI.getAll(itemsPerPage, continuation),
+    movie: async (root, { id, language }, { dataSources }) =>
+      dataSources.tmdbAPI.getMovie(id, language),
   },
   Article: {
     image: article =>
@@ -25,7 +27,7 @@ export default {
         .text()
         .trim(),
     origin: async (article, args, { dataSources }) => {
-      const { subscriptions } = await dataSources.articlesAPI.getSubscriptions();
+      const { subscriptions } = await dataSources.inoreaderAPI.getSubscriptions();
       return subscriptions.find(subscription => subscription.id === article.origin.streamId);
     },
     categories: article => {
@@ -37,6 +39,23 @@ export default {
         }
         return categories;
       }, []);
+    },
+  },
+  Movie: {
+    ratings: async (article, args, { dataSources }) => {
+      const omdbData = await dataSources.omdbAPI.getMovie(article.imdb_id);
+      return [
+        {
+          source: 'The Movie Database',
+          value: article.vote_average,
+        },
+        ...omdbData.Ratings.map(rating => {
+          return {
+            source: rating.Source,
+            value: rating.Value,
+          };
+        }),
+      ];
     },
   },
 };

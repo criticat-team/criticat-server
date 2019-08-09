@@ -2,7 +2,9 @@ import { ApolloServer } from 'apollo-server';
 import mongoose from 'mongoose';
 import resolvers from '@/resolvers';
 import typeDefs from '@/schema';
-import ArticlesAPI from '@/datasources/articles';
+import InoreaderAPI from '@/datasources/inoreader';
+import TmdbAPI from '@/datasources/tmdb';
+import OmdbAPI from '@/datasources/omdb';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -17,7 +19,9 @@ mongoose.connection.once('open', () => console.log(`Connected to mongo at ${mong
 
 // set up any dataSources our resolvers need
 const dataSources = () => ({
-  articlesAPI: new ArticlesAPI(),
+  inoreaderAPI: new InoreaderAPI(),
+  tmdbAPI: new TmdbAPI(),
+  omdbAPI: new OmdbAPI(),
 });
 
 // Set up Apollo Server
