@@ -3,7 +3,7 @@ import querystring from 'querystring';
 
 const DEFAULT_ITEMS_PER_PAGE = 12;
 
-export default class ArticlesAPI extends RESTDataSource {
+export default class InoreaderAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://www.inoreader.com/reader/api/0/';
