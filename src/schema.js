@@ -65,6 +65,11 @@ const typeDefs = gql`
     name: String
   }
 
+  type Rating {
+    source: String
+    value: String
+  }
+
   type Movie {
     adult: Boolean
     backdrop_path: String
@@ -88,6 +93,7 @@ const typeDefs = gql`
     tagline: String
     title: String
     video: String
+    ratings: [Rating]
   }
 
   # The "Query" type is the root of all GraphQL queries.

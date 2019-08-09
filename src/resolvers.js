@@ -40,4 +40,21 @@ export default {
       }, []);
     },
   },
+  Movie: {
+    ratings: async (article, args, { dataSources }) => {
+      const omdbData = await dataSources.omdbAPI.getMovie(article.imdb_id);
+      return [
+        {
+          source: 'The Movie Database',
+          value: article.vote_average,
+        },
+        ...omdbData.Ratings.map(rating => {
+          return {
+            source: rating.Source,
+            value: rating.Value,
+          };
+        }),
+      ];
+    },
+  },
 };
