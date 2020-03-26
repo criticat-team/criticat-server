@@ -13,6 +13,9 @@ export default {
         : dataSources.inoreaderAPI.getAll(itemsPerPage, continuation),
     movie: async (root, { id, language }, { dataSources }) =>
       dataSources.tmdbAPI.getMovie(id, language),
+    liveStreams: async (root, { language, itemsPerPage, offset }, { dataSources }) => {
+      return dataSources.twitchAPI.getLiveStreams(language, itemsPerPage, offset);
+    },
   },
   Article: {
     image: article =>
@@ -58,4 +61,5 @@ export default {
       ];
     },
   },
+  TwitchLiveStream: {},
 };

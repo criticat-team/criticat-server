@@ -6,6 +6,7 @@ import InoreaderAPI from '@/datasources/inoreader';
 import TmdbAPI from '@/datasources/tmdb';
 import OmdbAPI from '@/datasources/omdb';
 import dotenv from 'dotenv';
+import TwitchAPI from '@/datasources/twitch';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ const dataSources = () => ({
   inoreaderAPI: new InoreaderAPI(),
   tmdbAPI: new TmdbAPI(),
   omdbAPI: new OmdbAPI(),
+  twitchAPI: new TwitchAPI(),
 });
 
 // Set up Apollo Server
