@@ -112,12 +112,67 @@ const typeDefs = gql`
     images: Images
   }
 
+  type TwitchLiveStreamResponse {
+    streams: [TwitchLiveStream]
+    _total: Int
+  }
+
+  type TwitchLiveStreamPreview {
+    small: String
+    medium: String
+    large: String
+    template: String
+  }
+
+  type TwitchChannel {
+    _id: ID
+    mature: Boolean
+    status: String
+    broadcaster_language: String
+    broadcaster_software: String
+    display_name: String
+    game: String
+    language: String
+    name: String
+    created_at: String
+    updated_at: String
+    partner: Boolean
+    logo: String
+    video_banner: String
+    profile_banner: String
+    profile_banner_background_color: String
+    url: String
+    views: Int
+    followers: Int
+    broadcaster_type: String
+    description: String
+    private_video: Boolean
+    privacy_options_enabled: Boolean
+  }
+
+  type TwitchLiveStream {
+    _id: ID
+    game: String
+    community_id: String
+    community_ids: [String]
+    viewers: Int
+    video_height: Int
+    average_fps: Int
+    delay: Int
+    created_at: String
+    is_playlist: Boolean
+    stream_type: String
+    preview: TwitchLiveStreamPreview
+    channel: TwitchChannel
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
     books: [Book]
     articles(category: String, itemsPerPage: Int, continuation: String): ArticlesStream
     movie(id: ID!, language: String): Movie
+    liveStreams(language: String, itemsPerPage: Int, offset: Int): TwitchLiveStreamResponse
   }
 `;
 
