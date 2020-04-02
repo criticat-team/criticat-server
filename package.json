@@ -4,9 +4,9 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "babel-node src/index.js",
-    "dev": "nodemon src/index.js --exec \"npm run lint && babel-node src/index.js\"",
-    "lint": "eslint --ext .js --ignore-path .gitignore ."
+    "start": "graphql-codegen && ts-node -r tsconfig-paths/register src/index.ts",
+    "dev": "concurrently --raw \"nodemon --exec ts-node -r tsconfig-paths/register src/index.ts\" \"graphql-codegen --watch\"",
+    "generate": "graphql-codegen"
   },
   "repository": {
     "type": "git",
@@ -19,24 +19,37 @@
   },
   "homepage": "https://github.com/criticat-team/criticat-server#readme",
   "dependencies": {
-    "apollo-datasource-rest": "^0.4.0",
-    "apollo-server": "^2.4.8",
+    "apollo-datasource-mongodb": "^0.2.5",
+    "apollo-datasource-rest": "^0.8.0",
+    "apollo-server": "^2.11.0",
     "cheerio": "^1.0.0-rc.3",
-    "dotenv": "^7.0.0",
-    "graphql": "^14.2.1",
+    "dotenv": "^8.2.0",
+    "graphql": "^14.6.0",
     "html-entities": "^1.2.1",
-    "mongoose": "^5.7.5",
-    "nodemon": "^1.18.11"
+    "lodash": "^4.17.15",
+    "mongoose": "^5.9.7",
+    "nodemon": "^2.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/node": "^7.2.2",
-    "@babel/preset-env": "^7.4.4",
-    "babel-plugin-root-import": "^6.1.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^4.2.0",
+    "@graphql-codegen/cli": "^1.13.1",
+    "@graphql-codegen/typescript": "1.13.1",
+    "@graphql-codegen/typescript-resolvers": "1.13.1",
+    "@types/cheerio": "^0.22.17",
+    "@types/graphql": "^14.5.0",
+    "@types/html-entities": "^1.2.16",
+    "@types/lodash": "^4.14.149",
+    "@types/mongoose": "^5.7.8",
+    "@types/node": "^13.9.8",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "babel-plugin-root-import": "^6.5.0",
+    "concurrently": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
     "eslint-import-resolver-babel-plugin-root-import": "^1.1.1",
-    "eslint-plugin-import": "^2.17.2"
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^2.0.2",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.8.3"
   }
 }
