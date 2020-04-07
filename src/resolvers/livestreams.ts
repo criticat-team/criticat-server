@@ -6,7 +6,7 @@ interface ReducedTwitchLiveItem extends LiveStream {
   $twitchStream?: TwitchStream;
 }
 
-const reduceInoreaderItem = (twitchStream: TwitchStream): ReducedTwitchLiveItem => ({
+const reduceTwitchStream = (twitchStream: TwitchStream): ReducedTwitchLiveItem => ({
   id: twitchStream.id,
   gameId: twitchStream.game_id,
   language: twitchStream.language,
@@ -30,7 +30,7 @@ const resolvers: Resolvers<Context> = {
     ): Promise<LiveStreams> => {
       const livestreams = await dataSources.twitchAPI.getStreams(itemsPerPage, continuation);
       return {
-        items: livestreams.data.map(reduceInoreaderItem),
+        items: livestreams.data.map(reduceTwitchStream),
         continuation: livestreams.pagination.cursor,
       };
     },

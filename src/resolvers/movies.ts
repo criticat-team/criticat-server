@@ -36,16 +36,17 @@ const reduceTmdbMovie = (tmdbMovie: TmdbMovie): ReducedTmdbMovie => ({
   adult: tmdbMovie.adult,
   backdropPath: tmdbMovie.backdrop_path,
   belongsToCollection: tmdbMovie.belongs_to_collection
-    ? Object.assign(tmdbMovie.belongs_to_collection, {
+    ? {
+        ...tmdbMovie.belongs_to_collection,
         id: tmdbMovie.belongs_to_collection.id.toString(),
-      })
+      }
     : null,
   budget: tmdbMovie.budget,
   genres: tmdbMovie.genres.map(
-    (tmdbGenre: TmdbGenre): MovieGenre =>
-      Object.assign(tmdbGenre, {
-        id: tmdbGenre.id.toString(),
-      }),
+    (tmdbGenre: TmdbGenre): MovieGenre => ({
+      ...tmdbGenre,
+      id: tmdbGenre.id.toString(),
+    }),
   ),
   homepage: tmdbMovie.homepage,
   originalLanguage: tmdbMovie.original_language,
@@ -54,10 +55,10 @@ const reduceTmdbMovie = (tmdbMovie: TmdbMovie): ReducedTmdbMovie => ({
   popularity: tmdbMovie.popularity,
   posterPath: tmdbMovie.poster_path,
   productionCompanies: tmdbMovie.production_companies.map(
-    (tmdbCompany: TmdbCompany): MovieProductionCompany =>
-      Object.assign(tmdbCompany, {
-        id: tmdbCompany.id.toString(),
-      }),
+    (tmdbCompany: TmdbCompany): MovieProductionCompany => ({
+      ...tmdbCompany,
+      id: tmdbCompany.id.toString(),
+    }),
   ),
   productionCountries: tmdbMovie.production_countries,
   releaseDate: tmdbMovie.release_date,
