@@ -18,6 +18,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources,
+  tracing: process.env.NODE_ENV !== 'production',
 });
 
 // Start our server if we're not in a test env.
