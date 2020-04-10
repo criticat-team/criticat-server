@@ -20,7 +20,7 @@ const reduceInoreaderItem = (inoreaderItem: InoreaderItem): ReducedInoreaderItem
   published: inoreaderItem.published,
   author: inoreaderItem.author,
   origin: {
-    title: inoreaderItem.origin.title,
+    title: entities.decode(inoreaderItem.origin.title),
     htmlUrl: inoreaderItem.origin.htmlUrl,
     $inoreaderItemOrigin: inoreaderItem.origin,
   },
