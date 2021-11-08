@@ -21,7 +21,7 @@
   "dependencies": {
     "apollo-datasource-mongodb": "^0.2.5",
     "apollo-datasource-rest": "^0.8.0",
-    "apollo-server": "^2.11.0",
+    "apollo-server": "^2.25.3",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
     "graphql": "^14.6.0",
